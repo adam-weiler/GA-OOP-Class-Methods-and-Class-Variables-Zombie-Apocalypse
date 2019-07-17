@@ -27,8 +27,9 @@ class Zombie:
     def __str__(self): #Returns a meaningful string that describes the instance.
         return f'Zombie instance: Max speed of {self.max_speed}, horde is {self.horde} plague level is {self.plague_level}, default speed is {self.default_speed}, max strength is {self.max_strength}, default strength is {self.default_strength}, speed is {self.speed}, and strength is {self.strength}.'
 
-    def __repr__(self): #Returns starting values of instance.
-        return f'Zombie instance: max_speed={self.max_speed} horde={self.horde} plague_level={self.plague_level} default_speed={self.default_speed} speed={self.speed}'
+    # def __repr__(self): #Returns starting values of instance.
+    #     return f'Zombie instance: max_speed={self.max_speed} horde={self.horde} plague_level={self.plague_level} default_speed={self.default_speed} speed={self.speed}'
+
 
 
         
@@ -41,9 +42,10 @@ class Zombie:
         new_zombies = random.randint(1, Zombie.plague_level)
         count = 0
 
-        while count < new_zombies:
+        while count <= new_zombies:
             speed = random.randint(1, Zombie.max_speed)
-            Zombie.horde.append(Zombie(speed))
+            strength = random.randint(1, Zombie.max_strength)
+            Zombie.horde.append(Zombie(speed, strength))
             count += 1
 
     @classmethod
@@ -88,13 +90,22 @@ class Zombie:
         Returns a summary of what happened.
         """
         outrun = self.chase()
+        battle = self.fight()
 
         if outrun:
             return 'You escaped!'
         else:
-            if fight:
-                new_zombie = Zombie()
-                cls.horde.append(new_zombie)
+            if battle:
+                # new_zombie = Zombie()
+                # cls.horde.append(new_zombie)
+
+
+                speed = random.randint(1, Zombie.max_speed)
+                strength = random.randint(1, Zombie.max_strength)
+                Zombie.horde.append(Zombie(speed, strength))
+
+
+
                 return 'You are now a zombie. Rawwwwwrgh!!'
             else:
                 return 'You died.'
@@ -122,26 +133,26 @@ class Zombie:
         return my_strength > self.strength
 
 
-# print(str(Zombie))
-walking_dead = Zombie(5, 5)
-# print(walking_dead)
-walking_dead.fight()
+# # print(str(Zombie))
+# walking_dead = Zombie(5, 5)
+# # print(walking_dead)
+# walking_dead.fight()
 
 
 
 
 print(Zombie.horde) # []
-# Zombie.new_day()
-# print(Zombie.horde) # [<__main__.Zombie object at 0x7f6f594f0d30>, <__main__.Zombie object at 0x7f6f594f0b70>, <__main__.Zombie object at 0x7f6f594f0d68>]
-# zombie1 = Zombie.horde[0]
-# print(zombie1) # Speed: 1 -- Strength: 7
-# zombie2 = Zombie.horde[1]
-# print(zombie2) # Speed: 2 -- Strength: 7
-# print(zombie1.encounter()) # You escaped!
-# print(zombie2.encounter()) # You fought the zombie and caught the plague.  You are now a zombie too.  Raaaawrgh
-# Zombie.new_day()
-# print(Zombie.horde) # [<__main__.Zombie object at 0x7f6f594f0d30>, <__main__.Zombie object at 0x7f6f594efef0>, <__main__.Zombie object at 0x7f6f594f0c50>, <__main__.Zombie object at 0x7f6f594f0cc0>]
-# zombie1 = Zombie.horde[0]
-# zombie2 = Zombie.horde[1]
-# print(zombie1.encounter()) # You died!
-# print(zombie2.encounter()) # You escaped!
+Zombie.new_day()
+print(Zombie.horde) # [<__main__.Zombie object at 0x7f6f594f0d30>, <__main__.Zombie object at 0x7f6f594f0b70>, <__main__.Zombie object at 0x7f6f594f0d68>]
+zombie1 = Zombie.horde[0]
+print(zombie1) # Speed: 1 -- Strength: 7
+zombie2 = Zombie.horde[1]
+print(zombie2) # Speed: 2 -- Strength: 7
+print(zombie1.encounter()) # You escaped!
+print(zombie2.encounter()) # You fought the zombie and caught the plague.  You are now a zombie too.  Raaaawrgh
+Zombie.new_day()
+print(Zombie.horde) # [<__main__.Zombie object at 0x7f6f594f0d30>, <__main__.Zombie object at 0x7f6f594efef0>, <__main__.Zombie object at 0x7f6f594f0c50>, <__main__.Zombie object at 0x7f6f594f0cc0>]
+zombie1 = Zombie.horde[0]
+zombie2 = Zombie.horde[1]
+print(zombie1.encounter()) # You died!
+print(zombie2.encounter()) # You escaped!
