@@ -54,6 +54,7 @@ class Zombie:
         """
         Zombie.spawn()
         Zombie.some_die_off()
+        Zombie.increase_plague_level()
 
     @classmethod
     def some_die_off(cls):
@@ -66,6 +67,14 @@ class Zombie:
             Zombie.horde.pop(random_zombie)
             counter += 1
 
+
+
+
+    @classmethod
+    def increase_plague_level(cls):
+        """Randomly increases the plague level (between 0 and 2).
+        """
+        Zombie.plague_level += random.randint(0, 2)
 
     
 
@@ -121,7 +130,7 @@ walking_dead.fight()
 
 
 
-# print(Zombie.horde) # []
+print(Zombie.horde) # []
 # Zombie.new_day()
 # print(Zombie.horde) # [<__main__.Zombie object at 0x7f6f594f0d30>, <__main__.Zombie object at 0x7f6f594f0b70>, <__main__.Zombie object at 0x7f6f594f0d68>]
 # zombie1 = Zombie.horde[0]
