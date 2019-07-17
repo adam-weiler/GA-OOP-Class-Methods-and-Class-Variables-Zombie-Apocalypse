@@ -25,7 +25,7 @@ class Zombie:
 
 
     def __str__(self): #Returns a meaningful string that describes the instance.
-        return f'Zombie instance: Max speed of {self.max_speed}, horde is {self.horde} plague level is {self.plague_level}, default speed is {self.default_speed}, and speed is {self.speed}'
+        return f'Zombie instance: Max speed of {self.max_speed}, horde is {self.horde} plague level is {self.plague_level}, default speed is {self.default_speed}, max strength is {self.max_strength}, default strength is {self.default_strength}, speed is {self.speed}, and strength is {self.strength}.'
 
     def __repr__(self): #Returns starting values of instance.
         return f'Zombie instance: max_speed={self.max_speed} horde={self.horde} plague_level={self.plague_level} default_speed={self.default_speed} speed={self.speed}'
@@ -66,6 +66,11 @@ class Zombie:
             Zombie.horde.pop(random_zombie)
             counter += 1
 
+
+    
+
+    
+
     def encounter(self):
         """This instance method represents you coming across a zombie! This can end in two possible outcomes:
         1. You outrun the zombie and escape unscathed!
@@ -88,13 +93,24 @@ class Zombie:
 
 
 
+    def fight(self):
+        """Represents you trying to fight this particular zombie.
+        Uses `Zombie.max_strength` to generate a random number that represents how well you managed to fight.
+        """
+        my_strength = random.randint(1, Zombie.max_strength)
 
-
+        # if my_strength > self.strength:
+        #     print('You win!')
+        # else:
+        #     print('You lose...')
+        
+        return my_strength > self.strength
 
 
 # print(str(Zombie))
-walking_dead = Zombie(5, 42)
-print(walking_dead)
+walking_dead = Zombie(5, 5)
+# print(walking_dead)
+walking_dead.fight()
 
 
 
