@@ -1,17 +1,20 @@
 import random
 
+zombie_names = ['Alice', 'Chloe', 'Dale', 'Dewey', 'Georgina', 'Haleema', 'Ibraheem', 'Iona', 'Keira', 'Kelly', 'Lloyd', 'Lucas', 'Lucia', 'Marshall', 'Nicole', 'Oliver', 'Paul', 'Seth', 'Sophie', 'Victor']
+
 class Zombie:
 
     max_speed = 5
     horde = []
     plague_level = 10
     default_speed = 1
-    max_strength = 8 #This value won't change.
-    default_strength = 3 #This value won't change.
+    max_strength = 8  #This value won't change.
+    default_strength = 3  #This value won't change.
 
-    def __init__(self, speed, strength):
-        """Initializes zombie's speed and strength.
+    def __init__(self, name, speed, strength):
+        """Initializes zombie's name, speed and strength.
         """
+        self.name = name
         if speed > Zombie.max_speed:
             self.speed = Zombie.default_speed
         else:
@@ -22,18 +25,20 @@ class Zombie:
         else:
             self.strength = strength
 
+    def __str__(self):  #Return a meaningful string of the instance.
+        return f'''Zombie instance: Max speed of {self.max_speed}, 
+        horde is {self.horde} plague level is {self.plague_level}, 
+        default speed is {self.default_speed}, 
+        max strength is {self.max_strength}, 
+        default strength is {self.default_strength}, 
+        speed is {self.speed}, and strength is {self.strength}.'''
 
-
-    def __str__(self): #Returns a meaningful string that describes the instance.
-        return f'Zombie instance: Max speed of {self.max_speed}, horde is {self.horde} plague level is {self.plague_level}, default speed is {self.default_speed}, max strength is {self.max_strength}, default strength is {self.default_strength}, speed is {self.speed}, and strength is {self.strength}.'
-
-    # def __repr__(self): #Returns starting values of instance.
-    #     return f'Zombie instance: max_speed={self.max_speed} horde={self.horde} plague_level={self.plague_level} default_speed={self.default_speed} speed={self.speed}'
+    def __repr__(self): #Returns starting values of instance.
+        return f'{self.name} STR{self.strength} SPD:{self.speed}'
 
 
 
         
-
     @classmethod
     def spawn(cls):
         """Spawns a random number of new zombies, based on the plague level,
@@ -43,9 +48,10 @@ class Zombie:
         count = 0
 
         while count <= new_zombies:
+            name = random.choice(zombie_names)
             speed = random.randint(1, Zombie.max_speed)
             strength = random.randint(1, Zombie.max_strength)
-            Zombie.horde.append(Zombie(speed, strength))
+            Zombie.horde.append(Zombie(name, speed, strength))
             count += 1
 
     @classmethod
@@ -143,7 +149,7 @@ class Zombie:
 
 print(Zombie.horde) # []
 Zombie.new_day()
-print(Zombie.horde) # [<__main__.Zombie object at 0x7f6f594f0d30>, <__main__.Zombie object at 0x7f6f594f0b70>, <__main__.Zombie object at 0x7f6f594f0d68>]
+print(Zombie.horde) # [<A random number of zombies using zombie_names.>]
 zombie1 = Zombie.horde[0]
 print(zombie1) # Speed: 1 -- Strength: 7
 zombie2 = Zombie.horde[1]
